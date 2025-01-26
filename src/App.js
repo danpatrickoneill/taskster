@@ -3,7 +3,7 @@ import "./App.css";
 import { socket } from "./socket";
 import NewTaskForm from "./components/NewTaskForm";
 import Task from "./components/Task";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const tasks = {};
 
