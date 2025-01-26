@@ -1,14 +1,33 @@
-const {
+import {
   Button,
   Checkbox,
   FormGroup,
   FormControlLabel,
   TextField,
-} = require("@mui/material/");
+} from "@mui/material/";
+import { socket } from "../socket";
+import { useState } from "react";
+
 export default function NewTaskForm() {
-  const handleClick = () => {};
+  const [value, setValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = () => {
+    setIsLoading(true);
+
+    const newTask = {
+      id: 1,
+      title: "Wash dishes",
+      description: "Scrubby scrubby scrubby scrub.",
+      createdAt: new Date(1737853422013).toISOString(),
+    };
+
+    socket.timeout(5000).emit("create task", newTask);
+  };
+
   const buttonText = "Create Task";
   const label = "Completed";
+
   return (
     <>
       <FormGroup>
@@ -30,7 +49,6 @@ export default function NewTaskForm() {
         <Button onClick={handleClick} variant="contained">
           {buttonText}
         </Button>
-        <FormControlLabel control={<Checkbox />} label={label} />
       </FormGroup>
     </>
   );

@@ -10,8 +10,15 @@ const server = createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
+    credentials: true,
   },
 });
+
+// app.get("/", (req, res) => {
+//   res.json({
+//     hi: "hello",
+//   });
+// });
 
 // io.on("connection", (socket) => {
 //   console.log("a user connected");
@@ -38,10 +45,13 @@ io.on("connection", (socket) => {
     TASKS.push(task);
     io.emit("tasks updated", TASKS);
   });
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
-server.listen(3000, () => {
-  console.log("server running at http://localhost:3000");
+io.listen(4000, () => {
+  console.log("server running at http://localhost:4000");
 });
 
 function initializeLists() {
