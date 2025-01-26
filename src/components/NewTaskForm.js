@@ -6,6 +6,7 @@ const {
   TextField,
 } = require("@mui/material/");
 export default function NewTaskForm() {
+  const handleClick = () => {};
   const buttonText = "Create Task";
   const label = "Completed";
   return (
@@ -26,7 +27,9 @@ export default function NewTaskForm() {
           defaultValue="Default Value"
           variant="standard"
         />
-        <Button variant="contained">{buttonText}</Button>
+        <Button onClick={handleClick} variant="contained">
+          {buttonText}
+        </Button>
         <FormControlLabel control={<Checkbox />} label={label} />
       </FormGroup>
     </>
