@@ -1,0 +1,7 @@
+.taskContainer {
+    display: flex;
+    flex-direction: column;
+    height: 10%;
+    width: 10%;
+    background-color: goldenrod;
+}

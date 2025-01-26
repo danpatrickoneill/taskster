@@ -5,7 +5,7 @@ const {
   FormControlLabel,
   TextField,
 } = require("@mui/material/");
-export default function TaskCard() {
+export default function NewTaskForm() {
   const buttonText = "Create Task";
   const label = "Completed";
   return (
