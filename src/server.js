@@ -34,6 +34,8 @@ const io = new Server(server, {
 //     console.log(args);
 //   });
 // });
+let SESSION_TASKS = TASKS;
+
 function generateObjectId() {
   return Math.random().toString(16).slice(2);
 }
@@ -42,7 +44,6 @@ function emitTasks(socket) {
 }
 
 io.on("connection", (socket) => {
-  let SESSION_TASKS = TASKS;
   console.log(SESSION_TASKS);
   socket.onAny((eventName, ...args) => {
     console.log(eventName);
@@ -70,7 +71,7 @@ io.on("connection", (socket) => {
   socket.on("delete task", (id) => {
     console.log(71, id);
     console.log(72, SESSION_TASKS);
-    SESSION_TASKS = SESSION_TASKS.filter((e) => e._id === id);
+    SESSION_TASKS = SESSION_TASKS.filter((e) => e._id !== id);
     console.log(SESSION_TASKS);
     io.emit("tasks updated", SESSION_TASKS);
   });
