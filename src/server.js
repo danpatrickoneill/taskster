@@ -67,11 +67,10 @@ io.on("connection", (socket) => {
     console.log(SESSION_TASKS);
     io.emit("tasks updated", SESSION_TASKS);
   });
-  socket.on("delete task", (task) => {
-    console.log(58, task);
-    const searchId = task._id;
-    console.log(59, SESSION_TASKS, searchId);
-    SESSION_TASKS = SESSION_TASKS.filter((e) => e._id === searchId);
+  socket.on("delete task", (id) => {
+    console.log(71, id);
+    console.log(72, SESSION_TASKS);
+    SESSION_TASKS = SESSION_TASKS.filter((e) => e._id === id);
     console.log(SESSION_TASKS);
     io.emit("tasks updated", SESSION_TASKS);
   });
