@@ -14,26 +14,6 @@ const io = new Server(server, {
   },
 });
 
-// app.get("/", (req, res) => {
-//   res.json({
-//     hi: "hello",
-//   });
-// });
-
-// io.on("connection", (socket) => {
-//   console.log("a user connected");
-//   socket.on("chat message", (msg) => {
-//     console.log("message: " + msg);
-//     io.emit("chat message", msg);
-//   });
-//   socket.on("disconnect", () => {
-//     console.log("user disconnected");
-//   });
-//   socket.onAny((eventName, ...args) => {
-//     console.log(eventName);
-//     console.log(args);
-//   });
-// });
 let SESSION_TASKS = TASKS;
 
 function generateObjectId() {

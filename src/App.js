@@ -35,7 +35,7 @@ function App() {
       socket.off("disconnect", onDisconnect);
       socket.off("tasks updated", onTaskEvent);
     };
-  }, [tasks]);
+  }, []);
 
   return (
     <div className="App">

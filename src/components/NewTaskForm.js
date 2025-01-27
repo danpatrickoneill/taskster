@@ -43,11 +43,13 @@ export default function NewTaskForm() {
               id="filled-required"
               label="What do you need to do?"
               variant="standard"
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
               id="standard-multiline-static"
               label="How do you want to do it?"
+              value={description}
               multiline
               rows={4}
               variant="standard"
