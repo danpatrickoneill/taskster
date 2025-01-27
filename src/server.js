@@ -55,10 +55,11 @@ io.on("connection", (socket) => {
     io.emit("tasks updated", TASKS);
   });
   socket.on("update task", (task) => {
+    console.log(58, task);
     const searchId = task._id;
     console.log(59, TASKS, searchId);
     TASKS.splice(
-      TASKS.indexOf((e) => e._id === searchId),
+      TASKS.findIndex((e) => e._id === searchId),
       1,
       task
     );
@@ -73,14 +74,3 @@ io.on("connection", (socket) => {
 io.listen(4000, () => {
   console.log("server running at http://localhost:4000");
 });
-
-function initializeLists() {
-  // get lists from local
-  const currentTime = Date.now();
-  const defaultList = {
-    user: null,
-    createdAt: currentTime,
-    tasks: [],
-  };
-  // default list? good idea
-}

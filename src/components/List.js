@@ -4,13 +4,7 @@ import NewTaskForm from "./NewTaskForm";
 
 export default function List(props) {
   const { tasks, updateTask } = props;
-  console.log(3, tasks, updateTask);
-
-  const handleCheckboxChange = (task, isCompleted) => {
-    const updatedTask = { ...task, isCompleted };
-    console.log(11, updatedTask);
-    updateTask(updatedTask);
-  };
+  console.log(3, tasks);
 
   return (
     <Stack spacing={4}>
@@ -20,7 +14,6 @@ export default function List(props) {
           title={task.title}
           description={task.description}
           isCompleted={task.isCompleted}
-          handleCheckboxChange={handleCheckboxChange}
         />
       ))}
       <NewTaskForm />

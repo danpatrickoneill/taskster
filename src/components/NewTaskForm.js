@@ -9,6 +9,7 @@ import {
 } from "@mui/material/";
 import { socket } from "../socket";
 import { useState } from "react";
+import { emitCreateTask } from "../helpers/emitters";
 
 export default function NewTaskForm() {
   const [title, setTitle] = useState("");
@@ -23,9 +24,10 @@ export default function NewTaskForm() {
       title,
       description,
       createdAt: new Date(1737853422013).toISOString(),
+      isCompleted: false,
     };
 
-    socket.timeout(5000).emit("create task", newTask);
+    emitCreateTask(newTask);
   };
 
   const buttonText = "Create Task";

@@ -7,41 +7,32 @@ import {
   CardContent,
 } from "@mui/material/";
 import "./Task.css";
-import { socket } from "../socket";
 import { useState, useEffect } from "react";
+import { emitToggleTaskComplete, emitCreateTask } from "../helpers/emitters";
 
 export default function Task(props) {
-  const [isLoading, setIsLoading] = useState(false);
+  console.log(14, props.isCompleted);
+  const { _id, title, description, isCompleted } = props.task;
 
-  const handleClick = (b) => {
-    console.log(b);
+  //   console.log(props.task, isCompleted);
 
-    console.log(title);
-    setIsLoading(true);
-
-    const newTask = {
-      title,
-      description,
-      createdAt: new Date(1737853422013).toISOString(),
-    };
-
-    socket.timeout(5000).emit("update task", newTask);
-  };
-
-  const [isCompleted, setisCompleted] = useState(
-    props.task.isCompleted || false
-  );
-
-  const { title, description } = props.task;
   const buttonText = "Create Task";
   const label = "Completed";
+  const handleClick = () => {
+    emitToggleTaskComplete({ ...props.task, isCompleted: !isCompleted });
+  };
   return (
     <Box sx={{ minWidth: 275, maxWidth: 550 }}>
+      <p>{isCompleted ? "COMPLETE" : "NOT COMPLETE"}</p>
       <Card>
         <CardContent>
           <p>{title}</p>
           <p>{description}</p>
-          <Checkbox onChange={(e) => handleClick(e.target.value)} />
+          <Checkbox
+            checked={isCompleted}
+            onChange={handleClick}
+            inputProps={{ "aria-label": "controlled" }}
+          />
         </CardContent>
       </Card>
     </Box>

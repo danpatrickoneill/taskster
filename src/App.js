@@ -22,6 +22,7 @@ function App() {
     }
 
     function onTaskEvent(value) {
+      console.log(25, tasks);
       setTasks(value);
     }
 
@@ -34,17 +35,14 @@ function App() {
       socket.off("disconnect", onDisconnect);
       socket.off("tasks updated", onTaskEvent);
     };
-  }, []);
-  const updateTask = (task) => {
-    socket.timeout(5000).emit("update task", task);
-  };
+  }, [tasks]);
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Taskster</h1>
       </header>
-      <List tasks={tasks} updateTask={updateTask} />
+      <List tasks={tasks} />
     </div>
   );
 }
