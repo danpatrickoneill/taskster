@@ -1,9 +1,6 @@
 const express = require("express");
-const { log } = require("node:console");
 const { createServer } = require("node:http");
-const { join } = require("node:path");
 const { Server } = require("socket.io");
-const { TASKS } = require("./constants/TASKS");
 
 const app = express();
 const server = createServer(app);
@@ -14,7 +11,7 @@ const io = new Server(server, {
   },
 });
 
-let SESSION_TASKS = TASKS;
+let SESSION_TASKS = [];
 
 function generateObjectId() {
   return Math.random().toString(16).slice(2);
