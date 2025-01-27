@@ -1,12 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { socket } from "./socket";
-import NewTaskForm from "./components/NewTaskForm";
-import Task from "./components/Task";
 import List from "./components/List";
 import { useState, useEffect } from "react";
-
-const tasks = {};
 
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
