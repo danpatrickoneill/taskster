@@ -38,7 +38,7 @@ export default function Task(props) {
   };
 
   return (
-    <Box sx={{ minWidth: 275, maxWidth: 550 }}>
+    <Box sx={{ minWidth: 200, maxWidth: 400 }}>
       <p>{isCompleted ? "COMPLETE" : "NOT COMPLETE"}</p>
       <Card>
         <CardContent>

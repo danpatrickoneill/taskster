@@ -7,7 +7,7 @@ export default function List(props) {
   console.log(3, tasks);
 
   return (
-    <Stack spacing={4}>
+    <Stack padding={4} spacing={4}>
       {tasks.map((task) => (
         <Task
           task={task}
