@@ -16,9 +16,6 @@ let SESSION_TASKS = [];
 function generateObjectId() {
   return Math.random().toString(16).slice(2);
 }
-function emitTasks(socket) {
-  return socket.emit();
-}
 
 io.on("connection", (socket) => {
   console.log(SESSION_TASKS);
