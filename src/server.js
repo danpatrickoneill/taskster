@@ -34,6 +34,12 @@ const io = new Server(server, {
 //     console.log(args);
 //   });
 // });
+function generateObjectId() {
+  return Math.random().toString(16).slice(2);
+}
+function emitTasks(socket) {
+  return socket.emit();
+}
 
 io.on("connection", (socket) => {
   console.log(TASKS);
@@ -42,7 +48,21 @@ io.on("connection", (socket) => {
     console.log(args);
   });
   socket.on("create task", (task) => {
-    TASKS.push(task);
+    const _id = generateObjectId();
+    const createdAt = Date.now();
+    const taskWithInfo = { ...task, _id, createdAt };
+    TASKS.push(taskWithInfo);
+    io.emit("tasks updated", TASKS);
+  });
+  socket.on("update task", (task) => {
+    const searchId = task._id;
+    console.log(59, TASKS, searchId);
+    TASKS.splice(
+      TASKS.indexOf((e) => e._id === searchId),
+      1,
+      task
+    );
+    console.log(TASKS);
     io.emit("tasks updated", TASKS);
   });
   socket.on("disconnect", () => {

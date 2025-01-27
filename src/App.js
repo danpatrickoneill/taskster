@@ -35,18 +35,16 @@ function App() {
       socket.off("tasks updated", onTaskEvent);
     };
   }, []);
+  const updateTask = (task) => {
+    socket.timeout(5000).emit("update task", task);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <NewTaskForm />
-        <List tasks={tasks} />
-        <Task
-          title="Sample Task"
-          description="This is what I need to do, more specfically"
-        />
+        <h1>Taskster</h1>
       </header>
+      <List tasks={tasks} updateTask={updateTask} />
     </div>
   );
 }

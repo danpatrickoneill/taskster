@@ -1,6 +1,8 @@
 import {
+  Box,
   Button,
-  Checkbox,
+  Card,
+  CardContent,
   FormGroup,
   FormControlLabel,
   TextField,
@@ -9,16 +11,17 @@ import { socket } from "../socket";
 import { useState } from "react";
 
 export default function NewTaskForm() {
-  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
+    console.log(title);
     setIsLoading(true);
 
     const newTask = {
-      id: 1,
-      title: "Wash dishes",
-      description: "Scrubby scrubby scrubby scrub.",
+      title,
+      description,
       createdAt: new Date(1737853422013).toISOString(),
     };
 
@@ -29,27 +32,33 @@ export default function NewTaskForm() {
   const label = "Completed";
 
   return (
-    <>
-      <FormGroup>
-        <TextField
-          required
-          id="filled-required"
-          label="Task name"
-          defaultValue="TODO"
-          variant="standard"
-        />
-        <TextField
-          id="standard-multiline-static"
-          label="HOWDOYOUDO"
-          multiline
-          rows={4}
-          defaultValue="Default Value"
-          variant="standard"
-        />
-        <Button onClick={handleClick} variant="contained">
-          {buttonText}
-        </Button>
-      </FormGroup>
-    </>
+    <Box sx={{ minWidth: 275, maxWidth: 550 }}>
+      <Card>
+        <CardContent>
+          <FormGroup>
+            <TextField
+              required
+              id="filled-required"
+              label="Task name"
+              defaultValue="TODO"
+              variant="standard"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <TextField
+              id="standard-multiline-static"
+              label="What specifically to do"
+              multiline
+              rows={4}
+              defaultValue="Get into it"
+              variant="standard"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <Button onClick={handleClick} variant="contained">
+              {buttonText}
+            </Button>
+          </FormGroup>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }
