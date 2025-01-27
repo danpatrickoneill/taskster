@@ -8,3 +8,7 @@ export function emitToggleTaskComplete(task) {
 export function emitCreateTask(task) {
   socket.timeout(5000).emit("create task", task);
 }
+
+export function emitDeleteTask(task) {
+  socket.timeout(5000).emit("delete task", task);
+}

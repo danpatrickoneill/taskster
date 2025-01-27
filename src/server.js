@@ -42,7 +42,8 @@ function emitTasks(socket) {
 }
 
 io.on("connection", (socket) => {
-  console.log(TASKS);
+  let SESSION_TASKS = TASKS;
+  console.log(SESSION_TASKS);
   socket.onAny((eventName, ...args) => {
     console.log(eventName);
     console.log(args);
@@ -51,20 +52,28 @@ io.on("connection", (socket) => {
     const _id = generateObjectId();
     const createdAt = Date.now();
     const taskWithInfo = { ...task, _id, createdAt };
-    TASKS.push(taskWithInfo);
-    io.emit("tasks updated", TASKS);
+    SESSION_TASKS.push(taskWithInfo);
+    io.emit("tasks updated", SESSION_TASKS);
   });
   socket.on("update task", (task) => {
     console.log(58, task);
     const searchId = task._id;
-    console.log(59, TASKS, searchId);
-    TASKS.splice(
-      TASKS.findIndex((e) => e._id === searchId),
+    console.log(59, SESSION_TASKS, searchId);
+    SESSION_TASKS.splice(
+      SESSION_TASKS.findIndex((e) => e._id === searchId),
       1,
       task
     );
-    console.log(TASKS);
-    io.emit("tasks updated", TASKS);
+    console.log(SESSION_TASKS);
+    io.emit("tasks updated", SESSION_TASKS);
+  });
+  socket.on("delete task", (task) => {
+    console.log(58, task);
+    const searchId = task._id;
+    console.log(59, SESSION_TASKS, searchId);
+    SESSION_TASKS = SESSION_TASKS.filter((e) => e._id === searchId);
+    console.log(SESSION_TASKS);
+    io.emit("tasks updated", SESSION_TASKS);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
